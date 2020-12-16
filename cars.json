@@ -1,0 +1,15 @@
+{
+    "cars" : [
+        {
+            "brand": "Mersedes",
+            "model": "C63AMG",
+            "price": 4500000
+        },
+        {
+            "brand": "Audi",
+            "model": "S",
+            "price": 250000
+        }
+
+    ]
+}
