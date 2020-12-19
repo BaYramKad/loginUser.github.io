@@ -1,0 +1,40 @@
+body {
+    background-color: rgb(22, 139, 134);
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.output{
+    margin-top: 20px
+}
+.button{
+    padding: 10px 20px;
+    font-weight: 600;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: transparent;
+    background-color: rgb(0, 26, 255);
+    border: 2px solid #fff0;
+}
+
+button:hover {
+    border: 2px solid white;
+}
+
+li{
+    text-align: left;
+    line-height: 30px;
+}
+
+#btn-close {
+    font-size: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+    vertical-align: text-bottom;
+}
+
