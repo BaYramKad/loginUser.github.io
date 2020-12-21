@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const userData = function(){
         return JSON.parse(localStorage.getItem("userData")) || localStorage.setItem("userData", JSON.stringify([]));
-    }
+    };
     userData();
     
     const getTime = () => {
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
             password,
             name : user[0],
             lastName : user[1]
-        } 
+        };
     };
 
     const registrationUser = () => {
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 item.lastName = "Не указана";
             }
 
-            let newUser = `<li data-id=${i}>Имя: ${item.name}, Фамилия: ${item.lastName}, Зарегестрирован: ${item.time} <button data-id="${i}" id="btn-close">Удалить</button></li> `;
+            const newUser = `<li data-id=${i}>Имя: ${item.name}, Фамилия: ${item.lastName}, Зарегестрирован: ${item.time} <button data-id="${i}" id="btn-close">Удалить</button></li> `
             output.insertAdjacentHTML("beforeend", newUser);
         });
         
@@ -105,12 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
             password = prompt("Введите пароль");
 
         const data = userData();
-        const logIn = userLogIn(login, password)
+        const logIn = userLogIn(login, password);
         data.forEach(elem => {
             if (logIn.log === elem.login && logIn.pass === elem.password) {
                 strong.textContent = elem.name;
             } else {
-                alert("Не правильный логни или пароль")
+                alert("Не правильный логин или пароль")
             }
         });
     };
