@@ -27,36 +27,49 @@ document.addEventListener("DOMContentLoaded", () => {
         return dateNow;
     };
 
-    const registrationUser = () => {
+    const regUser = (user, password, login) => {
         const time = getTime();
-        let  user = prompt("Введите через пробел Имя и Фамилию пользователя").split(" "),
-            login = prompt("Введите Логин"),
-            password = prompt("Введите Пароль");
 
         while (user, login, password === ""){
-            user = prompt("Вы не указали Имя, логин или пароль пользователя").split(" "),
-            login = prompt("Логин"),
+            user = prompt("Вы не указали Имя, логин или пароль пользователя").split(" ");
+            login = prompt("Логин");
             password = prompt("Пароль");
         }
-        let data = userData();
-        data.push({
+
+        return { 
+            time,
             login,
             password,
-            time,
             name : user[0],
             lastName : user[1]
-        }); 
-        localStorage.setItem("userData", JSON.stringify(data));
-        render();
+        } 
+    };
+
+    const registrationUser = () => {
+        try {
+            const user = prompt("Введите через пробел Имя и Фамилию пользователя").split(" "),
+                login = prompt("Введите Логин"),
+                password = prompt("Введите Пароль");
+
+            const data = userData(),
+            userUs = regUser(user, password, login);
+            data.push(userUs); 
+            localStorage.setItem("userData", JSON.stringify(data));
+            render();
+        } catch {
+            return;
+        }
     };
 
     const render = () => {
         output.innerHTML = "";
         const dataUserStorage = JSON.parse(localStorage.getItem("userData"));
+    
         dataUserStorage.forEach((item, i) => {
             if (item.lastName === undefined || item.lastName === "") {
                 item.lastName = "Не указана";
             }
+
             let newUser = `<li data-id=${i}>Имя: ${item.name}, Фамилия: ${item.lastName}, Зарегестрирован: ${item.time} <button data-id="${i}" id="btn-close">Удалить</button></li> `;
             output.insertAdjacentHTML("beforeend", newUser);
         });
@@ -67,19 +80,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeLi = (elem) => {
         let data = userData();
         data.splice(elem, 1);
-        localStorage.setItem("userData", JSON.stringify(data))
+        localStorage.setItem("userData", JSON.stringify(data));
         render();
     };
+
     section.addEventListener("click", event => {
         let target = event.target;
         if (target.matches("#btn-close")) {
-            closeLi(+target.closest("li").dataset.id)
+            closeLi(+target.closest("li").dataset.id);
         }
     });
 
+    const userLogIn = (log, pass) => {
+        while (log, pass === "") {
+            log = prompt("Введите логин");
+            pass = prompt("Введите пароль");
+        }
+
+        return { log, pass};
+    };
+
     const loginUse = () => {
-        const dataUser = prompt("Введите логни"),
+        const login = prompt("Введите логин"),
             password = prompt("Введите пароль");
+
+        const data = userData();
+        const logIn = userLogIn(login, password)
+        data.forEach(elem => {
+            if (logIn.log === elem.login && logIn.pass === elem.password) {
+                strong.textContent = elem.name;
+            } else {
+                alert("Не правильный логни или пароль")
+            }
+        });
     };
 });
-    
