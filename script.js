@@ -21,12 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const regUser = (user, password, login) => {
         const time = getTime();
-
         while (user, login, password === ""){
             user = prompt("Вы не указали Имя, логин или пароль пользователя").split(" ");
             login = prompt("Логин");
             password = prompt("Пароль");
         }
+        if (password, login == null) { return };
         return { 
             time,
             login,
@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (item.lastName === undefined || item.lastName === "") {
                 item.lastName = "Не указана";
             }
-
             const newUser = `<li data-id=${i}>Имя: ${item.name}, Фамилия: ${item.lastName}, Зарегестрирован: ${item.time} <button data-id="${i}" id="btn-close">Удалить</button></li> `
             output.insertAdjacentHTML("beforeend", newUser);
         });
@@ -80,13 +79,13 @@ document.addEventListener("DOMContentLoaded", () => {
             log = prompt("Введите логин");
             pass = prompt("Введите пароль");
         }
-
         return { log, pass};
     };
 
     const loginUse = () => {
         const login = prompt("Введите логин"),
             password = prompt("Введите пароль");
+        if (login, password == null) { return }
         const data = userData();
         const logIn = userLogIn(login, password);
         data.forEach(elem => {
@@ -97,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     };
+    
     section.addEventListener("click", event => {
         let target = event.target;
         if (target.matches("#btn-close")) {
