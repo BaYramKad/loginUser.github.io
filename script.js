@@ -5,14 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
         strong = document.getElementById("strong"),
         section = document.querySelector(".section");
     
-    buttons.addEventListener("click", event => {
-        let target = event.target;
-        if (target.matches("#registration")) {
-            registrationUser();
-        } else if (target.matches("#login")) {
-            loginUse();
-        }
-    });
 
     const userData = function(){
         return JSON.parse(localStorage.getItem("userData")) || localStorage.setItem("userData", JSON.stringify([]));
@@ -35,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
             login = prompt("Логин");
             password = prompt("Пароль");
         }
-
         return { 
             time,
             login,
@@ -84,13 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
         render();
     };
 
-    section.addEventListener("click", event => {
-        let target = event.target;
-        if (target.matches("#btn-close")) {
-            closeLi(+target.closest("li").dataset.id);
-        }
-    });
-
     const userLogIn = (log, pass) => {
         while (log, pass === "") {
             log = prompt("Введите логин");
@@ -103,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginUse = () => {
         const login = prompt("Введите логин"),
             password = prompt("Введите пароль");
-
         const data = userData();
         const logIn = userLogIn(login, password);
         data.forEach(elem => {
@@ -114,4 +97,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     };
+    section.addEventListener("click", event => {
+        let target = event.target;
+        if (target.matches("#btn-close")) {
+            closeLi(+target.closest("li").dataset.id);
+        }
+    });
+
+    buttons.addEventListener("click", event => {
+        let target = event.target;
+        if (target.matches("#registration")) {
+            registrationUser();
+        } else if (target.matches("#login")) {
+            loginUse();
+        }
+    });
 });
